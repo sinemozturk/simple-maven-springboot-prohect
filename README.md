@@ -30,6 +30,13 @@
   - Installation of `MobaXterm ` or equivalent `SSH client for remote server access`.
   - Familiarity with software development concepts such as `compiling`, `building`, and `configuring` applications.
 
+# MAVEN Introduction
+
+
+
+Maven is a powerful build automation tool primarily used for Java projects, although it can be used to manage projects in other programming languages as well. It simplifies the process of building and managing projects by providing a standard way to define project structure, dependencies, and build process. Maven uses a project object model (POM) file to define project configurations and dependencies.
+
+
 
 # LET'S START
 
@@ -66,8 +73,9 @@ Utilize Spring Initializr to generate the initial structure for the Spring Boot 
 
 # STEP2: Download MobaXterm
 
-- What is MobaXterm and why we use it? 
-   - MobaXterm is a versatile and popular terminal emulator and remote desktop client for Windows. It integrates essential tools like SSH, X11 server, RDP, and file transfer capabilities into a single application, making it convenient for developers, system administrators, and IT professionals to manage remote servers and perform system administration tasks from their Windows machines. It's widely used for its intuitive interface, extensive feature set, and ease of use, offering a seamless experience for accessing and controlling remote systems efficiently.
+What is MobaXterm and why we use it? 
+
+MobaXterm is a versatile and popular terminal emulator and remote desktop client for Windows. It integrates essential tools like SSH, X11 server, RDP, and file transfer capabilities into a single application, making it convenient for developers, system administrators, and IT professionals to manage remote servers and perform system administration tasks from their Windows machines. It's widely used for its intuitive interface, extensive feature set, and ease of use, offering a seamless experience for accessing and controlling remote systems efficiently.
 
 - Go to https://mobaxterm.mobatek.net/download.html and choose `Free Version` and download the `MobaXterm Home Edition v23.6 (Portable Edition)` zip file and extract it. 
 
@@ -172,6 +180,235 @@ mvn -version
 - Output should look like this;
 
 ![](/MobaXterm/moba6.PNG)
+
+
+- Now we need to upload project file to `Github`
+
+- First go to Github.com and create a `Public` - `repository` and go to file that you store the Maven Project files in your local directory.
+
+- In this project my repo name is [simple-maven-springboot-prohect)](https://github.com/sinemozturk/simple-maven-springboot-prohect)
+
+- Go to gitbash terminal of your choice (ex: VSCODE, Gitbash) I will use VSCODE bash terminal
+
+- Run following commands;
+
+```bash
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/sinemozturk/simple-maven-springboot-prohect.git
+git push -u origin main
+```
+
+![](./Git/git1.PNG)
+
+- Go back to your repository that you created and refresh it you will be able to see your project files.
+
+- Go to `<Code>` button and copy the `HTTPS` url of your Github reporsitory 
+
+![](./Git/git2.PNG)
+
+- Now go back to your `MobaXterm` terminal and run following command, It will clone your repository to your EC2-instance. 
+
+```bash
+git clone https://github.com/sinemozturk/simple-maven-springboot-prohect.git
+```
+
+- You can run `ls` to see if it is succesfully uploaded or not. 
+
+![](./MobaXterm/moba7.PNG)
+
+- Now we need to go into the file that we created with Springboot which we stored in our Github Repo with `cd` command.
+
+```bash
+cd << paste your repo name>>
+ls
+cd <<paste your project name>> 
+```
+
+![](./MobaXterm/moba8.PNG)
+
+- We will be able to see our `Maven Project` files.
+
+# STEP6: Run Maven Commands
+
+- Now we can start with running our `Maven` commands in the order of this project.
+
+```bash
+mvn validate
+```
+
+Maven validate : Maven is used to validate the project configuration and ensure that it is correct and all necessary information is available. This command is often used to check for basic errors in the project setup before proceeding with the build process.
+
+When you run mvn validate, Maven will perform the following tasks:
+
+  - Validates the project structure: It checks if the project directory structure adheres to the Maven standard, such as the presence of src/main/java for source code and src/test/java for test code.
+
+  - Validates the project object model (POM): It verifies that the pom.xml file is well-formed and does not contain any syntax errors.
+
+  - Resolves project dependencies: It checks if all declared dependencies in the pom.xml file can be resolved from the configured repositories.
+
+- You should see following output;
+
+![](./MobaXterm/moba9.PNG)
+
+```bash
+mvn compile
+```
+
+Maven Compile: The mvn compile command in Maven is used to compile the source code of the project. When you run mvn compile, Maven will:
+
+   - Compile the Java source code located in the src/main/java directory.
+   - Generate compiled bytecode (.class files) from the Java source files.
+   - Place the compiled classes in the `target/classes directory` within the project's build directory.
+
+- You should see following output with a directory called `target` which is created with compile;
+
+![](./MobaXterm/moba10.PNG)
+
+- You can also go inside the  `target` directory and see what it is inside with `ls` command. But do not forget to go back to your project file path with `cd ..`
+
+
+```bash
+mvn test
+```
+
+Maven Test: Runs the tests for the project.
+
+The mvn test command in Maven is used to execute the tests defined in the project. When you run mvn test, Maven will:
+
+  - Compile the project's source code, including test source code located in the src/test/java directory.
+  - Run the tests using a testing framework such as JUnit or TestNG.
+  - Report the results of the tests, including information about passed, failed, or skipped tests.
+
+
+- You should see the output like this;
+
+
+![](./MobaXterm/moba11.PNG)
+
+
+```bash
+mvn package
+```
+
+Maven Package: Packages the compiled code into a distributable format, such as a JAR or WAR file.
+
+  - Compile the project's source code, if it has not already been compiled.
+  - Execute any necessary build tasks specified in the project configuration.
+  - Package the compiled classes, along with any additional resources (such as configuration files libraries, and static assets), into a distributable archive format.
+  - Place the resulting package in the target directory within the project's build directory.
+
+- Also you can see the attifact is generated with package command. But make sure go back to your project path with `cd ..` command
+
+
+![](./MobaXterm/moba12.PNG)
+
+
+```bash
+mvn install
+```
+
+Maven Install :  Installs the packaged artifact into the local Maven repository, making it available for other projects.
+
+  - Compile the project's source code, if it has not already been compiled.
+  - Execute any necessary build tasks specified in the project configuration.
+  - Package the compiled classes, along with any additional resources, into a distributable archive format (JAR, WAR, etc.).
+  - Install the packaged artifact into the local Maven repository (~/.m2/repository), making it available for use by other projects or modules on the same machine.
+
+- You should see the output like this;
+
+![](./MobaXterm/moba13.PNG)
+
+
+
+```bash
+mvn clean
+```
+
+Maven clean: This command solely cleans the project by removing any generated files and directories created during the build process. It deletes the target directory and any other temporary files generated during the build. However, it does not perform any build or packaging actions.
+
+
+![](./MobaXterm/moba14.PNG)
+
+```bash
+mvn clean package
+```
+
+Maven clean package: This command cleans the project first, just like mvn clean, by deleting the target directory. After cleaning, it proceeds to execute the package phase of the Maven build lifecycle. This includes compiling the source code, executing tests, and packaging the compiled classes and resources into a distributable archive (e.g., JAR, WAR).
+
+
+![](./MobaXterm/moba15.PNG)
+
+
+```bash
+java -jar target/ <<your jar file name>>
+```
+
+- Int this project my jar file called as :  `sinemsproject-0.0.1-SNAPSHOT.jar` and my command was `java -jar target/sinemsproject-0.0.1-SNAPSHOT.jar`
+
+The java -jar command is used to execute a Java application packaged as a standalone JAR (Java ARchive) file. Here's how it works:
+
+  - java: This command is used to launch the Java Virtual Machine (JVM), which is the runtime environment for running Java applications.
+
+  - -jar: This flag specifies that the next argument should be the path to a JAR file. When used in conjunction with java, it tells the JVM to execute the main class specified in the JAR's manifest file.
+
+
+- You should see output like this;
+
+![](/MobaXterm/moba16.PNG)
+
+
+- Now our project is running on port:8080 go back to your AWS Console and copy Publib IP of your Ec2 instance. 
+
+- Go to your browser -> paste it also make sure you add :8080 at the end of your public ip. Also make sure you connect with `http` not with `https` because https port (443) is different than http(8080). We only allowed 8080
+
+```
+http://<<your public IP>>:8080
+
+```
+
+- You should see the `Whitelabel Error Page` like following;
+
+![](./EC2/ec1-run.PNG)
+
+
+- The reason is we did not configure the java project to solve this problem we need to go back to our source code path is ->
+
+src/
+└── main/
+    └── java/
+        └── com/
+            └── example/ 
+                └── <<yourprojectfilename>>/
+                    └── HomeController.java 
+                    └── <<yourprojectfilename.java>>
+
+- We need to create a controller that handles requests to the root URL ("/") and returns the desired message. Here's how you can achieve this:
+
+Create a new Java `class` for your controller called by `HomeController.java`:
+
+```java
+
+package com.example.<<yourprojectfilename>>;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class HomeController {
+
+    @GetMapping("/")
+    @ResponseBody
+    public String home() {
+        return "Hi from this project";
+    }
+}
+
+
+```
 
 
 
