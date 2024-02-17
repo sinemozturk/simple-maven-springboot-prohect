@@ -387,7 +387,13 @@ src/
 
 - We need to create a controller that handles requests to the root URL ("/") and returns the desired message. Here's how you can achieve this:
 
-Create a new Java `class` for your controller called by `HomeController.java`:
+- Create a new Java `class` for your controller called by `HomeController.java`:
+
+- You can simply achieve this one with creating  HomeController.java file under the your project file. It will locate like this - > 
+ src/main/java/com/example/<<yourprojectfilename>>
+
+- Copy and modify the file name in the code and add into the HomeController.java
+
 
 ```java
 
@@ -407,17 +413,120 @@ public class HomeController {
     }
 }
 
+```
+
+- Now we will add `Html` and `Css` file to see little pretier look.
+
+- You can create an HTML file (e.g., `index.html`) in the src/main/resources/static directory. This HTML file can contain the text "hi from this project" or any other content you want to display.
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Greetings</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Reference to CSS file -->
+</head>
+<body>
+    <h1>Hi from this project</h1>
+</body>
+</html>
 
 ```
 
+- If you want to style your HTML content, you can create a CSS file (e.g., `styles.css`) in the src/main/resources/static directory and reference it from your HTML file.
+
+```css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color: blue;
+}
+
+```
+
+- Now we need to push the project to the github repo to update our source code
+
+- Go to gitbash terminal of your choice (ex: VSCODE, Gitbash) I will use VSCODE bash terminal
+
+- Run following commands;
+
+```bash
+git add .
+git commit - m "Java files are updated"
+git push -u origin main
+
+```
+
+- Now go to your MobaXterm and press the Ctrl+C to stop running the jar command that we run previously. 
+
+- First thing we need to update our source code with new changes that we made and store in gitgub repo. 
+
+- run following command to update your ec2 instance make sure that you're under the project folder file path. 
+
+```bash
+git pull origin main
+```
+
+- Output should look like this; 
+
+![](./MobaXterm/moba17.PNG)
+
+
+
+  - This command instructs Git to pull changes from the "main" branch of the remote repository named "origin" and merge them into your current local branch.
+
+- Now we can start building our app again. Execute following codes separately;
 
 
 ```bash
+mvn clean
+mvn compile
+mvn test
+mvn package
+java -jar <your-jar-file>.jar
+
 ```
 
 
+- Go to your browser and apply following command with your public IP
 
-```bash
+```text
+http://<<your public IP>>:8080
+
 ```
 
+- You will see something like; 
+
+![](./EC2/ec2-run2.PNG)
+
+
+- To see something cool go to following address; 
+
+```text
+http://<<your public IP>>:8080/index.html
+
+```
+
+- You should see something cool like this;
+
+![](./EC2/ec2-run3.PNG)
+
+
+
+![](./EC2/success.png)
+
+# Conclusion
+
+Congratulations on completing the setup of your Spring Boot project! 🎉 This project serves as a testament to your dedication and perseverance in learning new technologies and building practical applications. Remember that every challenge you faced and overcame during this project has contributed to your growth as a developer.
+
+As you continue your journey, embrace every opportunity to explore, experiment, and innovate. Stay curious, stay passionate, and never hesitate to reach out for help or guidance when needed. Your commitment to learning and improvement will pave the way for countless more successful projects in the future.
+
+Keep coding, keep creating, and keep pushing the boundaries of what you can achieve. The possibilities are endless, and your potential knows no bounds. Believe in yourself, trust in your abilities, and never forget that with determination and effort, anything is possible.
+
+Best of luck on your coding adventures! 💻✨
 
