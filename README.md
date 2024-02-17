@@ -376,6 +376,7 @@ http://<<your public IP>>:8080
 
 - The reason is we did not configure the java project to solve this problem we need to go back to our source code path is ->
 
+```
 src/
 └── main/
     └── java/
@@ -384,6 +385,7 @@ src/
                 └── <<yourprojectfilename>>/
                     └── HomeController.java 
                     └── <<yourprojectfilename.java>>
+```
 
 - We need to create a controller that handles requests to the root URL ("/") and returns the desired message. Here's how you can achieve this:
 
