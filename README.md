@@ -30,8 +30,13 @@
   - Installation of `MobaXterm ` or equivalent `SSH client for remote server access`.
   - Familiarity with software development concepts such as `compiling`, `building`, and `configuring` applications.
 
-# MAVEN Introduction
+![](Maven-project-sinem-ozturk-sumus.png)
 
+
+
+
+
+# MAVEN Introduction
 
 
 Maven is a powerful build automation tool primarily used for Java projects, although it can be used to manage projects in other programming languages as well. It simplifies the process of building and managing projects by providing a standard way to define project structure, dependencies, and build process. Maven uses a project object model (POM) file to define project configurations and dependencies.
